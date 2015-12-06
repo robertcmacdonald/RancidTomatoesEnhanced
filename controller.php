@@ -36,7 +36,17 @@ if (isset ( $_POST ['username'] ) && isset ( $_POST ['password'] )) {
 	session_destroy (); // destroy the session so $SESSION['anything'] is not set
 	header ( "Location: index.html" );
 } elseif (isset ( $_POST ['addMovie'] )) {
-	//TODO: after add movie form is written call addMovie function in dataBaseFunctions
+    $title = $_POST ['title'];
+    $year = $_POST ['year'];
+    $dir = $_POST ['director'];
+    $rating = $_POST ['rating'];
+    $rTime = $_POST ['runtime'];
+    $bOffice = $_POST ['boxOffice'];
+    // TODO: add image into this call somehow
+    $myDatabaseFunctions->addNewMovie($title, $year, $dir, $rating, $rTime, $bOffice );
+
+    //TODO: change this to load the new review page just made from call
+    header("Location: review.php");
 
 } elseif (isset ( $_POST ['newReview'] )) {
     //TODO: determine how to get movieTitle from reviewForm

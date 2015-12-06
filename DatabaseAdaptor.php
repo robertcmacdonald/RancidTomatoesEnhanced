@@ -29,6 +29,20 @@
             $stmt->execute ();
 		}
 
+        public function addNewMovie($title, $year, $dir, $rating, $rTime, $bOffice){
+            $stmt = $this->DB->prepare("INSERT INTO movies (dateAdded, movietitle, yearReleased, director, rating, runtime, boxOffice) VALUES (now(), :title, :yearR, :dir, :rating, :rTime, :bOffice)");
+            $stmt->bindParam('title', $title);
+            $stmt->bindParam('yearR', $year);
+            $stmt->bindParam('dir', $dir);
+            $stmt->bindParam('rating', $rating);
+            $stmt->bindParam('rTime', $rTime);
+            $stmt->bindParam('bOffice', $bOffice);
+            $stmt->execute();
+        }
+
+
+
+
 		// Return all quote records as an associative array.
 		// Example code to show id and flagged columns of all records:
 		// $myDatabaseFunctions = new DatabaseAdaptor();
