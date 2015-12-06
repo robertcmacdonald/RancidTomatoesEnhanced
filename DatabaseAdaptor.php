@@ -8,17 +8,27 @@
 		public function __construct() {
 			$db = 'mysql:dbname=quotes;host=127.0.0.1';
 			$user = 'root';
-			$password = 'projectok';
+			$password = '';
 			
 			try {
 				$this->DB = new PDO ( $db, $user, $password );
 				$this->DB->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 			} catch ( PDOException $e ) {
-				die($e)
+				die($e);
 				exit ();
 			}
 		}
-		
+
+        // adds a newReview to the database of reviews for movies yay
+		public function addNewReview($review, $author, $rating, $movieTitle){
+			$stmt = $this->DB->prepare ( "INSERT INTO reviews (dateAdded, username, reviewText, reviewRating, movieTitle) values(now(), :author, :text, :rating, :title,)" );
+            $stmt->bindParam ( 'author', $author );
+            $stmt->bindParam ( 'text', $review );
+            $stmt->bindParam ( 'rating', $rating );
+            $stmt->bindParam ( 'title', $movieTitle);
+            $stmt->execute ();
+		}
+
 		// Return all quote records as an associative array.
 		// Example code to show id and flagged columns of all records:
 		// $myDatabaseFunctions = new DatabaseAdaptor();

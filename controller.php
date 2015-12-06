@@ -23,7 +23,7 @@ if (isset ( $_POST ['username'] ) && isset ( $_POST ['password'] )) {
 		// TODO Change this to use $myDatabaseFunctions->canRegister($userName) so no
 		// two accounts can have the same account name. And if the requested
 		// accountname is in the database, tell the user so using an $_SESSION variable.
-		if ($myDatabaseFunctions->canRegister($username, $password)) {
+		if ($myDatabaseFunctions->canRegister($username)) {
 			$myDatabaseFunctions->register ( $username, $password );
 			header ( "Location: ./index.html" );
 		} else {
@@ -36,12 +36,15 @@ if (isset ( $_POST ['username'] ) && isset ( $_POST ['password'] )) {
 	session_destroy (); // destroy the session so $SESSION['anything'] is not set
 	header ( "Location: index.html" );
 } elseif (isset ( $_POST ['addMovie'] )) {
-	$myDatabaseFunctions->unFlagAll ( $ID );
-	header ( "Location: quotes.php" );
-} elseif (isset ( $_POST ['addReview'] ) {
-	$author = $_POST ['author'];
-	$quote = $_POST ['quote'];
-	$myDatabaseFunctions->addNewQuote ( $quote, $author );
+	//TODO: after add movie form is written call addMovie function in dataBaseFunctions
+
+} elseif (isset ( $_POST ['newReview'] )) {
+    //TODO: determine how to get movieTitle from reviewForm
+    // when we press add review button somehow pass the movie title to the form page?
+	$author = $_POST ['name'];
+	$review = $_POST ['reviewer'];
+    $rating = $_POST['rating'];
+	$myDatabaseFunctions->addNewReview( $review, $author, $rating, $movieTitle );
 	header ( "Location: quotes.php" );
 } 
 ?>
