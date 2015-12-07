@@ -3,5 +3,20 @@
 <head>
 </head>
 <body>
+	<ul>
+		<li><a href="search.html">Search for a movie</a>
+		<li><a href="login.php">Login or register</a>
+		<li><a href="index.php">Home</a>
+		<?php 
+			session_start ();
+			if (isset ( $_SESSION ["user"] )) {
+		
+			echo '<li><a href="newReview.php">Add new review</a>'
+			echo '<li><a href="newMovie.php">Add new movie</a>'
+			}
+		?>
+	</ul>
+	<h2>Newest movies</h2>
+	<h2>Newest reviews</h2>
 </body>
 </html>

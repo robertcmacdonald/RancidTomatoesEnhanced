@@ -6,9 +6,9 @@
 		// Make a connection to an existing data based named 'quotes' that has
 		// table quote. In this assignment you will also need a new table named 'users'
 		public function __construct() {
-			$db = 'mysql:dbname=quotes;host=127.0.0.1';
+			$db = 'mysql:dbname=Rancid;host=127.0.0.1';
 			$user = 'root';
-			$password = '';
+			$password = 'projectok';
 			
 			try {
 				$this->DB = new PDO ( $db, $user, $password );
@@ -21,23 +21,38 @@
 
         // adds a newReview to the database of reviews for movies yay
 		public function addNewReview($review, $author, $rating, $movieTitle){
-			$stmt = $this->DB->prepare ( "INSERT INTO reviews (dateAdded, username, reviewText, reviewRating, movieTitle) values(now(), :author, :text, :rating, :title,)" );
+			$stmt = $this->DB->prepare ( "INSERT INTO reviews (dateAdded, username, reviewText, reviewRating, movieTitle) values(now(), :author, :reviewText, :rating, :title)" );
             $stmt->bindParam ( 'author', $author );
-            $stmt->bindParam ( 'text', $review );
+            $stmt->bindParam ( 'reviewText', $review );
             $stmt->bindParam ( 'rating', $rating );
             $stmt->bindParam ( 'title', $movieTitle);
             $stmt->execute ();
 		}
 
-        public function addNewMovie($title, $year, $dir, $rating, $rTime, $bOffice){
-            $stmt = $this->DB->prepare("INSERT INTO movies (dateAdded, movietitle, yearReleased, director, rating, runtime, boxOffice) VALUES (now(), :title, :yearR, :dir, :rating, :rTime, :bOffice)");
+        public function addNewMovie($title, $year, $dir, $rating, $rTime, $bOffice, $imageLocation){
+            $stmt = $this->DB->prepare("INSERT INTO movies (dateAdded, movietitle, yearReleased, director, rating, runtime, boxOffice, imageLocation) VALUES (now(), :title, :yearR, :dir, :rating, :rTime, :bOffice, :imageLocation)");
             $stmt->bindParam('title', $title);
             $stmt->bindParam('yearR', $year);
             $stmt->bindParam('dir', $dir);
             $stmt->bindParam('rating', $rating);
             $stmt->bindParam('rTime', $rTime);
             $stmt->bindParam('bOffice', $bOffice);
+            $stmt->bindParam('imageLocation', $imageLocation);
             $stmt->execute();
+        }
+
+        public function getMovieByTitle($title){
+            $stmt = $this->DB->prepare("SELECT * FROM movies WHERE movieTitle= 	:title");
+            $stmt->bindParam('title', $title);
+            $stmt->execute();
+         	return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        }
+
+        public function getReviewsByTitle($title){
+            $stmt = $this->DB->prepare("SELECT * FROM reviews WHERE movieTitle= :title");
+            $stmt->bindParam('title', $title);
+            $stmt->execute();
+         	return $stmt->fetchAll ( PDO::FETCH_ASSOC );
         }
 
 
@@ -133,7 +148,7 @@
 			$user = $stmt->fetch ();
 			
 			// Hashing the password with its hash as the salt returns the same hash
-			if (password_verify ( $password, $user ['hash'] ))
+			if (password_verify ( $password, $user ['passhash'] ))
 				return TRUE;
 			else
 				return FALSE;

@@ -6,6 +6,24 @@
     <title></title>
 </head>
 <body>
+      <ul id='navbarUL'>
+        <li class='navbarItem'><a href="search.php">Search for a movie</a></li>
+        <li class='navbarItem'><a href="index.php">Home</a></li>
+        <?php 
+            session_start ();
+            if (isset ( $_SESSION ["user"] )) {
+        ?>
+            <li class='navbarItem'><a href="logout.php">Logout</a></li>
+            <li class='navbarItem'><a href="newReview.php">Add new review</a></li>
+            <li class='navbarItem'><a href="newMovie.php">Add new movie</a></li>
+        <?php
+            } else {
+        ?>
+            <li class='navbarItem'><a href="login.php">Login or register</a></li>
+        <?php
+            }
+        ?>
+    </ul>
 <div id="inputBox">
     Movie Title:  <input type="text" id="movieTitle" oninput="searchAndDisplay()">
 </div>
