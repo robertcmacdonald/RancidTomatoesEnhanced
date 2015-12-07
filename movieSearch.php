@@ -10,7 +10,7 @@ $title = $_GET['title'];
 
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "projectok";
 $dbname = "Rancid";
 
 try {

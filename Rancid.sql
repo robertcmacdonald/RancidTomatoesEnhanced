@@ -16,12 +16,18 @@ CREATE TABLE IF NOT EXISTS reviewers (
     id int AUTO_INCREMENT,
     username varchar(255),
     passhash varchar(255),
+    firstname varchar(255),
+    lastname varchar(255),
+    publication varchar(255),
     PRIMARY KEY (`id`)
 );
 CREATE TABLE IF NOT EXISTS reviews (
     id int AUTO_INCREMENT,
     dateAdded datetime,
     username varChar(255),
+    firstname varChar(255),
+    lastname varChar(255),
+    publication varChar(255),
     reviewText varChar(255),
     reviewRating varChar(255),
     movieTitle varChar(255),

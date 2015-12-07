@@ -1,17 +1,10 @@
 <!DOCTYPE html>
-<!--Cody Macdonald
-    CSc 337 Assignment 5
-    This PHP file contains the information that is displayed on the RancidTomatoes web page.
-    This is a modified version of tmnt.html from assignment 2. Much of the original HTML
-    remains, but some has been replaced with PHP code in order to display dynamic content.
--->
+
 <html>
 <head>
     <title>Rancid Tomatoes</title>
     <link rel="stylesheet" href="movie.css">
     <meta charset="utf-8" />
-    <?php  // Load functions from functions.php file
-    ?>
 </head>
 
 <body>
@@ -20,13 +13,31 @@
             <img src="images/rancidbanner.png" alt="Rancid Tomatoes">
         </div>
 	</div>
+    <ul id='navbarUL'>
+    	<li class='navbarItem'><a href="index.php">Home</a></li>
+        <li class='navbarItem'><a href="search.php">Search for a movie</a></li>
+        
+        <?php 
+            session_start ();
+            if (isset ( $_SESSION ["user"] )) {
+        ?>
+            <li class='navbarItem'><a href="logout.php">Logout</a></li>
+            <li class='navbarItem'><a href="newReview.php">Add new review</a></li>
+            <li class='navbarItem'><a href="newMovie.php">Add new movie</a></li>
+        <?php
+            } else {
+        ?>
+            <li class='navbarItem'><a href="login.php">Login or register</a></li>
+        <?php
+            }
+        ?>
+    </ul>
     <?php
     	require './controller.php';
-    	require_once('./DatabaseAdaptor.php');
         $movie = $_GET["movieTitle"];
-        $movieInfo = $myDatabaseFunctions->getMovieByTitle($movie);
+        $movieInfo = getMovie($movie);
         $movieInfo = $movieInfo[0];
-        $movieReviews = $myDatabaseFunctions->getReviewsByTitle($movie);
+        $movieReviews = getReviewsForMovie($movie);
         $ratings_array = ['G', 'PG', 'PG-13', 'R'];
     ?>
 	<h1 class="text_heading"><?= $movieInfo['movieTitle'] . " " . $movieInfo['yearReleased'] ?></h1>
