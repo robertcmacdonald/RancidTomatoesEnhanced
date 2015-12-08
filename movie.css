@@ -218,7 +218,7 @@ html, body {
 }
 
 .topTenColReviews {
-    border-radius:20px;
+    /*border-radius:20px;*/
     float:left;
     width:25.57%;
     margin:20px;
@@ -227,6 +227,7 @@ html, body {
     background-color:#EEEEEE;
     box-shadow: 5px 5px 5px #888888;
     height:900px;
+    overflow:auto;
 }
 
 
