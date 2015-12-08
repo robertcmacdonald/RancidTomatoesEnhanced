@@ -12,14 +12,14 @@
     </div>
     <ul id='navbarUL'>
         <li class='navbarItem'><a href="index.php">Home</a></li>
-        <li class='navbarItem'><a href="search.php">Search for a movie</a></li>
+        <li class='navbarItem'><a href="search.php">Search Movies</a></li>
         <?php 
             session_start ();
             if (isset ( $_SESSION ["user"] )) {
         ?>
-            <li class='navbarItem'><a href="newReview.php">Add new review</a></li>
-            <li class='navbarItem'><a href="newMovie.php">Add new movie</a></li>
-            <li class='navbarItem'><a href="logout.php">Logout</a></li>
+            <li class='navbarItem'><a href="newReview.php">Add New Review</a></li>
+            <li class='navbarItem'><a href="newMovie.php">Add New Movie</a></li>
+            <li class='navbarItem'><a href="logout.php">Log Out</a></li>
         <?php
             } else {
         ?>
@@ -31,26 +31,53 @@
 </body>
 </html>
 
+
+
+<div id="newMovieDiv">
+<form action="controller.php" method="post" enctype="multipart/form-data" id="movieForm">
+    <table id="newMovieTable">
+        <tr>
+            <td>Title:</td>
+            <td><input type="text" name="title" required></td>
+        </tr>
+        <tr>
+            <td>Year:</td> 
+            <td><input type="number" name="year" required></td>
+        </tr>
+        <tr>
+            <td>Director: </td>
+            <td><input type="text" name="director" required></td>
+        </tr>
+        <tr>
+            <td>Rating:</td>
+            <td><input type="radio" name="rating" value="0">G
+            <input type="radio" name="rating" value="1">PG
+            <input type="radio" name="rating" value="2">PG-13
+            <input type="radio" name="rating" value="3">R</td>
+        </tr>
+        <tr>
+            <td>Runtime (IN MINUTES): </td>
+            <td><input type="number" name="runtime" required></td>
+        </tr>
+        <tr>
+            <td>Box Office (IN MILLIONS): </td>
+            <td><input  type="number" name="boxOffice" required></td>
+        </tr>
+        <tr>
+            <td>Image: </td>
+            <td><input type="file" name="movieImage" accept="image/*" required></td>
+        <tr>
+            <td></td>
+            <td><input type="submit" name="addMovie" value="Submit">
+                <button type="button" onclick="window.location.href='index.php'">Cancel</button></td>
+        </tr>
+    </table>
+</form>
+</div>
+
 <?php
     if (isset($_SESSION['movieError'])) {
         echo $_SESSION['movieError'];
         $_SESSION['movieError'] = "";
     }
 ?>
-
-<form action="controller.php" method="post" enctype="multipart/form-data" id="movieForm">
-    Title:<input type="text" name="title" required><br>
-    Year: <input type="number" name="year" required><br>
-    Director: <input type="text" name="director" required><br>
-    Rating:
-    <input type="radio" name="rating" value="0">G
-    <input type="radio" name="rating" value="1">PG
-    <input type="radio" name="rating" value="2">PG-13
-    <input type="radio" name="rating" value="3">R
-    <br>
-    Runtime (IN MINUTES): <input type="number" name="runtime" required><br>
-    BoxOffice (IN MILLIONS): <input  type="number" name="boxOffice" required><br>
-    Image: <input type="file" name="movieImage" accept="image/*" required>
-    <input type="submit" name="addMovie" value="Submit">
-</form>
-<!-- TODO: add cancel button to clear everything and take user to homepage -->

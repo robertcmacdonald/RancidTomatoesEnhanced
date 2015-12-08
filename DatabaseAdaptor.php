@@ -66,13 +66,13 @@
         }
 
         public function getLatestMovies() {
-        	$stmt = $this->DB->prepare("SELECT * FROM movies ORDER BY id DESC LIMIT 10");
+        	$stmt = $this->DB->prepare("SELECT * FROM movies ORDER BY id DESC LIMIT 12");
         	$stmt->execute();
         	return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function getLatestReviews() {
-        	$stmt = $this->DB->prepare("SELECT * FROM reviews ORDER BY id DESC LIMIT 10");
+        	$stmt = $this->DB->prepare("SELECT * FROM reviews ORDER BY id DESC LIMIT 5");
         	$stmt->execute();
         	return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
@@ -140,9 +140,5 @@
 	} // end class DatabaseAdaptor
 	
 	$myDatabaseFunctions = new DatabaseAdaptor ();
-	
-	// Test code can only be used temporaily here. If kept, deleting account 'fourth' from anywhere would 
-	// cause these asserts to generate error messages. And when did you find out 'fourth' is registered?
-	// assert ( $myDatabaseFunctions->verified ( 'fourth', '4444' ) );
-	// assert ( ! $myDatabaseFunctions->canRegister ( 'fourth' ) );
+
 	?>

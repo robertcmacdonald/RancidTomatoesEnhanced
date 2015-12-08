@@ -13,14 +13,14 @@
     </div>
     <ul id='navbarUL'>
         <li class='navbarItem'><a href="index.php">Home</a></li>
-        <li class='navbarItem'><a href="search.php">Search for a movie</a></li>
+        <li class='navbarItem'><a href="search.php">Search Movies</a></li>
         <?php 
             session_start ();
             if (isset ( $_SESSION ["user"] )) {
         ?>
-            <li class='navbarItem'><a href="newReview.php">Add new review</a></li>
-            <li class='navbarItem'><a href="newMovie.php">Add new movie</a></li>
-            <li class='navbarItem'><a href="logout.php">Logout</a></li>
+            <li class='navbarItem'><a href="newReview.php">Add New Review</a></li>
+            <li class='navbarItem'><a href="newMovie.php">Add New Movie</a></li>
+            <li class='navbarItem'><a href="logout.php">Log Out</a></li>
         <?php
             } else {
         ?>
@@ -30,15 +30,11 @@
         ?>
     </ul>
 <div id="inputBox">
-    Movie Title:  <input type="text" id="movieTitle" oninput="searchAndDisplay()">
+    Search movies by title: <br>  <input type="text" id="movieTitle" oninput="searchAndDisplay()">
 </div>
-<div id="firstBox">
-    <p id="firstTitles">
-
-    </p>
-</div>
-<div id="secondBox">
-    <p id ="secondTitles">
+<div id="searchResults">
+    <b><p>Results</p></b>
+    <p id="searchTitles">
 
     </p>
 </div>
@@ -52,25 +48,16 @@
         xhttp.onreadystatechange = function(){
             var testing = document.getElementById("inputBox");
             if (input == "" ) {
-                var firstbox = document.getElementById("firstTitles");
+                var firstbox = document.getElementById("searchTitles");
                 firstbox.innerHTML = "";
-                var secondBox = document.getElementById("secondTitles");
-                secondBox.innerHTML = "";
             } else {
                if(xhttp.readyState = 4 && xhttp.status == 200){
                 var array = JSON.parse(xhttp.responseText);
-                var firstbox = document.getElementById("firstTitles");
+                var firstbox = document.getElementById("searchTitles");
                 firstbox.innerHTML = "";
-                for(var i =0; i < array.length && i < 10; i++){
+                for(var i =0; i < array.length; i++){
                     firstbox.innerHTML += '<a href="reviewPage.php?movieTitle=' + array[i].movieTitle + '">' + 
                         array[i].movieTitle + '</a><br>';
-                }
-                var secondBox = document.getElementById("secondTitles");
-                secondBox.innerHTML = "";
-                if(array.length > 10){
-                    for( var ii = 10; ii < 20 && ii < array.length; ii++){
-                        secondBox.innerHTML += array[ii].movieTitle + '<br>';
-                    }
                 }
             } 
             }

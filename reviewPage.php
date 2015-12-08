@@ -15,15 +15,15 @@
 	</div>
     <ul id='navbarUL'>
     	<li class='navbarItem'><a href="index.php">Home</a></li>
-        <li class='navbarItem'><a href="search.php">Search for a movie</a></li>
-        
+        <li class='navbarItem'><a href="search.php">Search Movies</a></li>
         <?php 
             session_start ();
             if (isset ( $_SESSION ["user"] )) {
         ?>
-            <li class='navbarItem'><a href="logout.php">Logout</a></li>
-            <li class='navbarItem'><a href="newReview.php">Add new review</a></li>
-            <li class='navbarItem'><a href="newMovie.php">Add new movie</a></li>
+            <li class='navbarItem'><a href="newReview.php">Add New Review</a></li>
+            <li class='navbarItem'><a href="newMovie.php">Add New Movie</a></li>
+            <li class='navbarItem'><a href="logout.php">Log Out</a></li>
+            <li class='navbarItem'><a href="newReview.php?movie=<?= $_GET['movieTitle'] ?>">Add Review For This Movie!</a></li>
         <?php
             } else {
         ?>
@@ -56,7 +56,7 @@
         </div>
         <div class="general_overview">
             <div id="overview_image">
-                <?= '<img src="' . $movieInfo['imageLocation'] . '" alt="general overview" />' ?>
+                <?= '<img src="' . $movieInfo['imageLocation'] . '" id="overviewImg" alt="general overview" />' ?>
             </div>
             <dl>
             	<dt>Director</dt>
@@ -64,9 +64,9 @@
             	<dt>Rating</dt>
             		<?= '<dd>' . $ratings_array[$movieInfo['rating']] . '</dd>' ?>
             	<dt>Runtime</dt>
-            		<?= '<dd>' . $movieInfo['runtime'] . '</dd>' ?>
+            		<?= '<dd>' . $movieInfo['runtime'] . ' minutes</dd>' ?>
             	<dt>Box office</dt>
-            		<?= '<dd>' . $movieInfo['boxOffice'] . '</dd>' ?>
+            		<?= '<dd>$' . $movieInfo['boxOffice'] . ' million</dd>' ?>
             </dl>
         </div>
         <footer class="page_footer">

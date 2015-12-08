@@ -1,7 +1,6 @@
 /*  Cody Macdonald
-    CSc 337 Assignment 5
+    CSc 337 Final Project
     This CSS file contains the styling for the RancidTomatoes web page.
-    Each selector in this file changes the display of tags in movie.php.                                                                                                                                 div tags to assist in the styling of the page.
 */
 
 html, body {
@@ -141,9 +140,23 @@ html, body {
     display:inline;
 }
 
-#overview_image {
-    width: 250;
-    height: 416;
+
+
+#overviewImg {
+    height:auto;
+    width:250px;
+}
+
+#frontpageimg {
+    height:250px;
+    width:150px;
+}
+
+.frontpageimgdiv {
+    float:left;
+    padding:5px;
+    padding-left:30px;
+
 }
 
 .page_footer {
@@ -175,8 +188,189 @@ html, body {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    font-family:Verdana;
 }
 
 .navbarItem a:hover {
     background-color: #111;
+}
+
+#newMovies {
+    text-align: center;
+    margin: 0 auto;
+}
+
+#newReviews {
+    width:75%;
+    margin: 0 auto;
+}
+
+.topTenColMovies {
+    border-radius:20px;
+    float:left;
+    width:60%;
+    margin:20px;
+    padding:5px;
+    border:2px solid darkgrey;
+    background-color:#EEEEEE;
+    box-shadow: 5px 5px 5px #888888;
+    height:900px;
+}
+
+.topTenColReviews {
+    border-radius:20px;
+    float:left;
+    width:25.57%;
+    margin:20px;
+    padding:5px;
+    border:2px solid darkgrey;
+    background-color:#EEEEEE;
+    box-shadow: 5px 5px 5px #888888;
+    height:900px;
+}
+
+
+.frontpagereview {
+    padding-bottom:20px;
+}
+
+.frontpagereviewtitle {
+    text-align: center;
+    font-family: Verdana;
+}
+
+.frontpagereview a:link {
+    text-decoration: none;
+}
+
+.frontpagereview a:hover {
+    color:lightblue;
+}
+
+#inputBox {
+    text-align: center;
+    border-radius:20px;
+    border:2px solid darkgrey;
+    background-color:#EEEEEE;
+    box-shadow: 5px 5px 5px #888888;
+    width:20%;
+    margin: 0 auto;
+    padding:15px;
+    margin-top:20px;
+    font-family: Verdana;
+    font-size:14px;
+}
+
+#movieTitle {
+    margin-top:10px;
+}
+
+#searchResults {
+    text-align: center;
+    border-radius:20px;
+    border:2px solid darkgrey;
+    background-color:#EEEEEE;
+    box-shadow: 5px 5px 5px #888888;
+    width:25%;
+    margin: 0 auto;
+    padding:15px;
+    margin-top:20px;    
+    font-family: Verdana;
+}
+
+#searchResults a:link {
+    text-decoration: none;
+}
+
+#searchResults a:hover {
+    color:lightblue;
+}
+
+#newMovieDiv {
+    text-align: center;
+    border-radius:20px;
+    border:2px solid darkgrey;
+    background-color:#EEEEEE;
+    box-shadow: 5px 5px 5px #888888;
+    width:35%;
+    margin: 0 auto;
+    padding:15px;
+    margin-top:20px;    
+    font-family: Verdana;
+}
+
+#newReviewTable {
+    width:100%;
+}
+
+#newReviewDiv {
+    text-align: center;
+    border-radius:20px;
+    border:2px solid darkgrey;
+    background-color:#EEEEEE;
+    box-shadow: 5px 5px 5px #888888;
+    width:50%;
+    margin: 0 auto;
+    padding:15px;
+    margin-top:20px;    
+    font-family: Verdana;
+}
+
+#newMovieTable {
+    width:100%;
+}
+
+#error {
+    text-align: center;
+    font-family: Verdana;
+    background-color: red;
+    color:white;
+    width:20%;
+    margin: 0 auto;
+    margin-top:40px;
+    padding:20px;
+    box-shadow: 5px 5px 5px #888888;
+    border-radius:20px;
+}
+
+#loginDiv {
+    text-align: center;
+    border-radius:20px;
+    border:2px solid darkgrey;
+    background-color:#EEEEEE;
+    box-shadow: 5px 5px 5px #888888;
+    width:20%;
+    margin: 0 auto;
+    padding:15px;
+    margin-top:20px;    
+    font-family: Verdana;
+}
+
+#loginTable {
+    width:100%;
+}
+
+#loginDiv a:link {
+    text-decoration: none;
+}
+
+#loginDiv a:hover {
+    color:lightblue;
+}
+
+#registerDiv {
+    text-align: center;
+    border-radius:20px;
+    border:2px solid darkgrey;
+    background-color:#EEEEEE;
+    box-shadow: 5px 5px 5px #888888;
+    width:19%;
+    margin: 0 auto;
+    padding:15px;
+    margin-top:20px;    
+    font-family: Verdana;
+}
+
+#registerTable {
+    width:100%;
 }

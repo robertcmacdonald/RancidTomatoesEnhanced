@@ -2,7 +2,7 @@
 // This file contains a bridge between the view and the model and redirects back to the proper page 
 // with after processing whatever form this codew absorbs.  This is the C in MVC, the Controller.
 //
-// Authors: Rick Mercer and Hassanain Jamal
+// Authors: Cody Macdonald and Allan Smith
 //
 require './DatabaseAdaptor.php';
 
@@ -17,13 +17,10 @@ if (isset ( $_POST ['username'] ) && isset ( $_POST ['password'] )) {
 			$_SESSION['loginError'] = '';
 			header ( "Location: ./index.php" );
 		} else {
-			$_SESSION ['loginError'] = 'Invalid Account/Password';
+			$_SESSION ['loginError'] = '<div id="error">Invalid Account/Password</div>';
 			header ( "Location: ./login.php" );
 		}
 	} else if (isset ( $_POST ['register'] )) {
-		// TODO Change this to use $myDatabaseFunctions->canRegister($userName) so no
-		// two accounts can have the same account name. And if the requested
-		// accountname is in the database, tell the user so using an $_SESSION variable.
 		if ($myDatabaseFunctions->canRegister($username)) {
 			$firstname = htmlspecialchars($_POST['firstname']);
 			$lastname = htmlspecialchars($_POST['lastname']);
@@ -32,7 +29,7 @@ if (isset ( $_POST ['username'] ) && isset ( $_POST ['password'] )) {
 			$_SESSION['registerError'] = '';
 			header ( "Location: ./login.php" );
 		} else {
-			$_SESSION['registerError'] = 'Username already in use';
+			$_SESSION['registerError'] = '<div id="error">Username already in use!</div>';
 			header ("Location: ./register.php");
 		}
 	}
@@ -43,7 +40,7 @@ if (isset ( $_POST ['username'] ) && isset ( $_POST ['password'] )) {
 } elseif (isset ( $_POST ['addMovie'] )) {
 	session_start();
 	if($myDatabaseFunctions->isValidTitle($_POST['title'])){
-		$_SESSION['movieError'] = 'Movie already exists!';
+		$_SESSION['movieError'] = '<div id="error">Movie already exists!</div>';
 		header("Location: newMovie.php");
 	} else {
 	    $title = htmlspecialchars($_POST ['title']);
@@ -79,7 +76,7 @@ if (isset ( $_POST ['username'] ) && isset ( $_POST ['password'] )) {
 		header ( "Location: reviewPage.php?movieTitle=" . $movieTitle );
 	} else {
 		session_start();
-		$_SESSION['reviewError']= "Invalid Movie Title";
+		$_SESSION['reviewError']= "<div id='error'>Invalid movie title!</div>";
 		header ( "Location: newReview.php" );
 	}
 } elseif (isset($_GET['search'] )) {
@@ -156,7 +153,9 @@ function getNewestMovies() {
 	$movies = $myDatabaseFunctions->getLatestMovies(); 
 	$str = "";
 	foreach ($movies as $movie) {
-		$str .= '<a href="reviewPage.php?movieTitle=' . $movie['movieTitle'] . '">' . $movie['movieTitle'] . '</a><br>';
+		$str .= '<div class="frontpageimgdiv"><a href="reviewPage.php?movieTitle=' . $movie['movieTitle'] . '">' . 
+			'<img id="frontpageimg" src="' . $movie['imageLocation'] . 
+			'" id="overviewImg" alt="general overview" />' . '</a></div>';
 	}
 	return $str;
 }
@@ -166,7 +165,8 @@ function getNewestReviews() {
 	$reviews = $myDatabaseFunctions->getLatestReviews(); 
 	$str = "";
 	foreach ($reviews as $review) {
-		$str .= '<div class="review">' . 
+		$str .= '<div class="frontpagereview"><div class="frontpagereviewtitle">' . '<a href="reviewPage.php?movieTitle=' . $review['movieTitle'] . '">' .  
+					$review['movieTitle'] . '</a></div>' . 
                     '<div class="review_text">' . 
                         '<p>';
         if ($review['reviewRating'] == 'f') {
