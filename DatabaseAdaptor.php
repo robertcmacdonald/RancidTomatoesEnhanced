@@ -72,7 +72,7 @@
         }
 
         public function getLatestReviews() {
-        	$stmt = $this->DB->prepare("SELECT * FROM reviews ORDER BY id DESC LIMIT 5");
+        	$stmt = $this->DB->prepare("SELECT * FROM reviews ORDER BY id DESC LIMIT 8");
         	$stmt->execute();
         	return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
